@@ -10,6 +10,7 @@ import pickle
 from scipy.ndimage import binary_fill_holes
 from skimage.morphology import thin
 import argparse
+import os
 
 label_map = {
     0: {0: "N0"},
@@ -281,7 +282,7 @@ def recognize(
 def main(input_path, output_path):
     imgs_path = sorted(glob(f"{input_path}/*"))
     for img_path in imgs_path:
-        img_name = img_path.split("/")[-1].split(".")[0]
+        img_name = os.path.splitext(os.path.basename(img_path))[0]
         out_file = open(f"{output_path}/{img_name}.txt", "w")
         print(f"Processing new image {img_name}...")
         img = io.imread(img_path)
