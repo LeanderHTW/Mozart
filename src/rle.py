@@ -7,17 +7,17 @@ def rle_encode(arr):
 
     x = np.copy(arr)
     first_dismatch = np.array(x[1:] != x[:-1])
-    distmatch_positions = np.append(np.where(first_dismatch), len(x)-1)
+    distmatch_positions = np.append(np.where(first_dismatch), len(x) - 1)
     rle = np.diff(np.append(-1, distmatch_positions))
     values = [x[i] for i in np.cumsum(np.append(0, rle))[:-1]]
     return rle, values
 
 
 def hv_rle(img, axis=1):
-    '''
+    """
     img: binary image
     axis: 0 for rows, 1 for cols
-    '''
+    """
     rle, values = [], []
 
     if axis == 1:
@@ -85,8 +85,11 @@ def most_common_bw_pattern(arr, most_common):
         # print("Empty")
         return []
     else:
-        res = [(arr[i], arr[i + 1]) for i in range(0, len(arr) - 1, 2)
-               if arr[i] + arr[i + 1] == most_common]
+        res = [
+            (arr[i], arr[i + 1])
+            for i in range(0, len(arr) - 1, 2)
+            if arr[i] + arr[i + 1] == most_common
+        ]
 
         if len(arr) % 2 == 1 and arr[-2] + arr[-1] == most_common:
             res.append((arr[-2], arr[-1]))

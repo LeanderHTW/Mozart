@@ -9,10 +9,9 @@ def get_connected_components(img_without_staff, img_with_staff):
     boundary = []
     # thresh = threshold_otsu(img_without_staff)
     # bw = closing(img_without_staff <= thresh, square(3))
-    bw = 1-img_without_staff
+    bw = 1 - img_without_staff
     label_img = label(bw)
-    img_label_overlay = label2rgb(
-        label_img, image=img_without_staff, bg_label=0)
+    img_label_overlay = label2rgb(label_img, image=img_without_staff, bg_label=0)
     for region in regionprops(label_img):
         if region.area >= 100:
             boundary.append(region.bbox)
